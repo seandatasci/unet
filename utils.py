@@ -22,7 +22,7 @@ def test_model(model_fn, train_loader, test_loader, train_steps=50, val_steps=50
     for i in range(iterations):
         # compile model
         model = model_fn(output_channels=1, **model_params)
-        model.compile(optimizer=Adam(lr=lr), loss='binary_crossentropy', metrics=['accuracy', 'dice_coef'])
+        model.compile(optimizer=Adam(lr=lr), loss='binary_crossentropy', metrics=['accuracy', dice_coef])
         
         # Callbacks
         
