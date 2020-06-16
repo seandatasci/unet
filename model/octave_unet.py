@@ -19,7 +19,7 @@ from tensorflow.keras.optimizers import *
 from tensorflow.keras.callbacks import ModelCheckpoint, LearningRateScheduler
 from keras_octave_conv import OctaveConv2D
       
-def unet(pretrained_weights = None,input_size = (800,600,1)):
+def o_unet(pretrained_weights = None,input_size = (800,600,1)):
 
     inputs = Input(input_size)
     # downsampling for low frequencies
