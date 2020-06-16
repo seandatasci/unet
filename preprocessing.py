@@ -24,7 +24,7 @@ filenames = os.listdir(src_pth)
 for f in filenames:
     img = Image.open(f'{src_pth}{f}')
     # upscale
-    img = img.resize((512, 512), resample=Image.BOX)
+    img = img.resize((800, 600), resample=Image.BOX)
     # Remove interpolation, set all pixels to either full black or white
     arr = np.array(img)
     arr[arr < arr.max()/2] = arr.min()
