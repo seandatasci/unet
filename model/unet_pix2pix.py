@@ -83,7 +83,7 @@ def upconv(x, out_channels, norm_type='batch', dropout=False, use_bias=True,
 # INTENDED API
 # ----------------------------------------------------------------------------
 
-def unet_pix2pix(input_size=(256,256,1), output_channels=1, init_gain=0.02):
+def unet_pix2pix(input_size=(800,600,1), output_channels=1, init_gain=0.02):
     """
     A Keras/Tensorflow implementation of the U-net used in the latest pix2pix 
     PyTorch official implementation:
