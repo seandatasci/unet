@@ -18,13 +18,8 @@ from tensorflow.keras import backend as K
 from tensorflow.keras.optimizers import *
 from tensorflow.keras.callbacks import ModelCheckpoint, LearningRateScheduler
 from keras_octave_conv import OctaveConv2D
-
-def dice_coef(y_true, y_pred, smooth=1):
-    intersection = K.sum(y_true * y_pred, axis=[1,2,3])
-    union = K.sum(y_true, axis=[1,2,3]) + K.sum(y_pred, axis=[1,2,3])
-    return K.mean( (2. * intersection + smooth) / (union + smooth), axis=0)
       
-def unet(pretrained_weights = None,input_size = (256,256,1)):
+def unet(pretrained_weights = None,input_size = (800,600,1)):
 
     inputs = Input(input_size)
     # downsampling for low frequencies
@@ -219,13 +214,5 @@ def unet(pretrained_weights = None,input_size = (256,256,1)):
     conv9 = layers.Activation("sigmoid")(conv9)
     conv10 = layers.Conv2D(1, 1, activation = 'sigmoid')(conv9)
 
-    model = Model(inputs=inputs, outputs=conv10)
-    
-    model.summary()
-    
-    model.compile(optimizer = Adam(lr = 1e-4), loss = 'binary_crossentropy', metrics = [dice_coef,'accuracy'])
-
-    if(pretrained_weights):
-    	model.load_weights(pretrained_weights)
-
+    model = Model(inputs=[inputs], outputs=[conv10])
     return model
