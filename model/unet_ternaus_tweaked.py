@@ -76,7 +76,7 @@ def reset_weights(model):
 # INTENDED API
 # ----------------------------------------------------------------------------
 
-def ternausNet16_tweaked(input_size=(256, 256, 3), output_channels=1, 
+def ternausNet16_tweaked(input_size=(800, 600, 3), output_channels=1, 
                          dropout=True, batch_norm=True, pretrained=True):
     """
     A Keras implementation of TernausNet16: 
