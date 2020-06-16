@@ -51,7 +51,7 @@ def decoder_block_ternausV2(inputs, mid_channels, out_channels):
 # INTENDED API
 # ------------------------------------------------------------------------------
 
-def ternausNet16(input_size=(256, 256, 3), output_channels=1):
+def ternausNet16(input_size=(800, 600, 3), output_channels=1):
     """
     A Keras implementation of TernausNet16: 
     https://arxiv.org/abs/1801.05746
