@@ -5,6 +5,11 @@ from tensorflow.keras.callbacks import ReduceLROnPlateau, EarlyStopping, ModelCh
 
 from pprint import pprint
 
+def dice_coef(y_true, y_pred, smooth=1):
+    intersection = K.sum(y_true * y_pred, axis=[1,2,3])
+    union = K.sum(y_true, axis=[1,2,3]) + K.sum(y_pred, axis=[1,2,3])
+    return K.mean( (2. * intersection + smooth) / (union + smooth), axis=0)
+  
 def test_model(model_fn, train_loader, test_loader, train_steps=50, val_steps=50, 
                epochs=1, iterations=5, lr=1e-4, model_params={}, save_pth=None) -> list:
     """
@@ -17,7 +22,7 @@ def test_model(model_fn, train_loader, test_loader, train_steps=50, val_steps=50
     for i in range(iterations):
         # compile model
         model = model_fn(output_channels=1, **model_params)
-        model.compile(optimizer=Adam(lr=lr), loss='binary_crossentropy', metrics=['accuracy'])
+        model.compile(optimizer=Adam(lr=lr), loss='binary_crossentropy', metrics=['accuracy', 'dice_coef'])
         
         # Callbacks
         
